@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { matchJD } from '@/lib/claude'
-import { supabaseAdmin } from '@/lib/supabase'
+import { supabaseAdmin } from '@/lib/supabaseAdmin'
 
 export async function POST(req: NextRequest) {
   try {
