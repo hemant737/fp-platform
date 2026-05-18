@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabaseAdmin } from '@/lib/supabase'
+import { supabaseAdmin } from '@/lib/supabaseAdmin'
 import { computeFPScore } from '@/lib/scoring'
 import { validateCollegeDomain } from '@/lib/colleges'
 
