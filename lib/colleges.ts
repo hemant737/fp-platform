@@ -1,17 +1,23 @@
+// FP team emails — always allowed regardless of domain
+export const FP_TEAM_EMAILS = [
+  'hemant@firstprinciple.org.in',
+  'samarth@firstprinciple.org.in',
+  'hemant@firstprinciples.org.in',
+  'samarth@firstprinciples.org.in',
+]
+
+// Whitelisted college domains
 export const COLLEGE_DOMAINS: Record<string, string> = {
-  'jaipuria.ac.in': 'Jaipuria Institute of Management',
-  'jaipuria.edu.in': 'Jaipuria Institute of Management',
+  'jaipuria.ac.in':   'Jaipuria Institute of Management',
+  'jaipuria.edu.in':  'Jaipuria Institute of Management',
   'mastersunion.org': 'Masters Union',
-  // Add more colleges here as partnerships are signed
 }
 
-export function validateCollegeDomain(email: string): { valid: boolean; college?: string } {
-  const domain = email.toLowerCase().split('@')[1]
-  if (!domain) return { valid: false }
+export function validateCollegeDomain(email: string): { valid: boolean; college?: string; isFPTeam?: boolean } {
+  const lower = email.toLowerCase().trim()
 
-  const college = COLLEGE_DOMAINS[domain]
+  if (FP_TEAM_EMAILS.includes(lower)) {
+    return { valid: true, college: 'First Principles', isFPTeam: true }
+  }
 
-  return college
-    ? { valid: true, college }
-    : { valid: false }
-}
+  const domain = lower
