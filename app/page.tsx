@@ -18,7 +18,7 @@ export default function StudentLogin() {
     const { valid } = validateCollegeDomain(trimmed)
 
     if (!valid) {
-      setError("This email domain isn't on our partner list yet. Use your college email or contact your placement cell.")
+      setError("This email isn't on our partner list yet. Contact your placement cell.")
       return
     }
 
@@ -28,7 +28,6 @@ export default function StudentLogin() {
       options: { emailRedirectTo: `${window.location.origin}/student/onboard` }
     })
     setLoading(false)
-
     if (e) { setError(e.message); return }
     setSent(true)
   }
@@ -38,10 +37,8 @@ export default function StudentLogin() {
       <div className="bg-[#F5F0E8] rounded-2xl p-10 max-w-sm w-full text-center">
         <FPMark />
         <div className="font-serif italic text-navy text-xl mt-4 mb-2">Check your inbox.</div>
-        <div className="text-sm text-steel leading-relaxed">
-          Login link sent to <strong>{email.trim().toLowerCase()}</strong>
-        </div>
-        <div className="text-xs text-steel/60 mt-3">Check spam if you don't see it within a minute.</div>
+        <div className="text-sm text-steel">Login link sent to <strong>{email.trim().toLowerCase()}</strong></div>
+        <div className="text-xs text-steel/60 mt-2">Check spam if you don't see it.</div>
       </div>
     </div>
   )
@@ -51,9 +48,7 @@ export default function StudentLogin() {
       <div className="bg-[#F5F0E8] rounded-2xl p-10 max-w-sm w-full">
         <div className="mb-7"><FPLogo size="lg" variant="dark" /></div>
         <div className="font-serif italic text-navy text-xl mb-1">Welcome.</div>
-        <div className="text-xs text-steel mb-6 leading-relaxed">
-          Sign in with your college email to access your profile and FP Score.
-        </div>
+        <div className="text-xs text-steel mb-6 leading-relaxed">Sign in with your college email to access your profile and FP Score.</div>
         <div className="mb-4">
           <div className="text-[10px] font-semibold tracking-widest uppercase text-steel mb-1.5">College email</div>
           <input
@@ -65,19 +60,12 @@ export default function StudentLogin() {
             className="w-full px-3 py-2.5 rounded-lg border border-black/10 bg-white text-sm text-navy outline-none focus:border-steel"
           />
         </div>
-        {error && (
-          <div className="text-xs text-red-600 mb-3 leading-relaxed">{error}</div>
-        )}
-        <button
-          onClick={login}
-          disabled={loading || !email.trim()}
-          className="w-full py-2.5 bg-navy text-cream text-sm font-medium rounded-lg disabled:opacity-50"
-        >
+        {error && <div className="text-xs text-red-600 mb-3 leading-relaxed">{error}</div>}
+        <button onClick={login} disabled={loading || !email.trim()}
+          className="w-full py-2.5 bg-navy text-cream text-sm font-medium rounded-lg disabled:opacity-50">
           {loading ? 'Sending...' : 'Send login link →'}
         </button>
-        <div className="text-xs text-steel text-center mt-4 leading-relaxed">
-          New student? Your placement cell will send you an invite.
-        </div>
+        <div className="text-xs text-steel text-center mt-4">New student? Your placement cell will send you an invite.</div>
       </div>
     </div>
   )
